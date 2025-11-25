@@ -18,6 +18,17 @@ app.use(cors({
 app.use('/api/news', require('./routes/news'));
 app.use('/api/auth', require('./routes/auth'));
 
+
+// Rota de teste / health check
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    message: 'API INAE 100% funcional!',
+    timestamp: new Date()
+  });
+});
+
+
 // Teste rápido
 app.get('/', (req, res) => {
   res.json({ message: 'Backend INAE 100% funcional!' });
