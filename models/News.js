@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const newsSchema = new mongoose.Schema({
+const NewsSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String, required: true }, 
+  image: { type: String, required: true },
   published: { type: Boolean, default: true },
-  createdAt: { type: Date, default: Date.now },
-});
+  views: { type: Number, default: 0 },        // NOVO CAMPO
+  createdAt: { type: Date, default: Date.now }
+})
 
-module.exports = mongoose.model('News', newsSchema);
+module.exports = mongoose.model('News', NewsSchema)

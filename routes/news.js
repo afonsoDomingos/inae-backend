@@ -13,6 +13,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// ROTA PÚBLICA: Incrementa visualizações quando alguém abre a notícia
+router.get('/:id/view', async (req, res) => {
+  try {
+    const news = await News.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 1 } },  // incrementa +1
+      { new: true }
+    )
+    if (!news) return res.status(404).json({ message: 'Notícia não encontrada' })
+    res.json(news)
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+
 // POST nova notícia (protegido)
 router.post('/', authMiddleware, async (req, res) => {
   const { title, description, image, published } = req.body;
